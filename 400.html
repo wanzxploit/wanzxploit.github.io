@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>400 Bad Request</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a202c; /* Latar belakang gelap */
+            color: #e2e8f0; /* Warna teks */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: url('logo.png') no-repeat center center / cover;
+            border: 5px solid #3182ce; /* Bingkai biru */
+            margin-bottom: 20px;
+        }
+
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            color: #f56565; /* Merah */
+            margin: 0;
+        }
+
+        .message {
+            font-size: 1.5rem;
+            margin: 10px 0 20px;
+        }
+
+        .btn-report {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            background-color: #3182ce; /* Biru */
+            color: #e2e8f0;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-report:hover {
+            background-color: #2b6cb0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo"></div>
+    <h1 class="error-code">400</h1>
+    <p class="message">Permintaan tidak valid. Harap coba lagi nanti.</p>
+    <p class="message">Jika masalah berlanjut, laporkan kepada kami.</p>
+    <a href="mailto:wanzxploit@gmail.com?subject=Laporan%20Error%20Server%20400&body=Deskripsikan%20masalah%20Anda%20di%20sini."
+       class="btn-report"
+       target="_blank">
+        Laporkan Masalah
+    </a>
+</body>
+</html>
