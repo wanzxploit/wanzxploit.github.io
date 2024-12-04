@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ <link rel="stylesheet" href="css/style.css"> 
+  <title>AdminFinder - CodeForker</title>
+  <body data-theme="light">
+    <header class="header" data-theme="light">
+        <div class="menu-toggle" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <p2>Admin Finder</p2>
+    </header>
+</head>
+    <style>
+        .admin-finder-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-finder-input {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .admin-finder-btn {
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .result-section {
+            margin-top: 20px;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-finder-container">
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="targetDomain" class="admin-finder-input" placeholder="Masukkan domain target (contoh: example.com)">
+            </div>
+            <div class="input-group">
+                <select id="listType" class="admin-finder-input">
+                    <option value="default">List Default</option>
+                    <option value="extended">List Extended</option>
+                    <option value="custom">List Custom</option>
+                </select>
+                <button onclick="startAdminFinder()" class="admin-finder-btn">
+                    <i class="fas fa-search"></i> Cari Admin Panel
+                </button>
+            </div>
+        </div>
+
+        <div id="resultSection" class="result-section" style="display:none;">
+            <h4>Hasil Pencarian</h4>
+            <div id="resultContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        const defaultAdminPaths = [
+            '/admin', '/administrator', '/login', '/wp-admin', 
+            '/admin-panel', '/backoffice', '/dashboard', '/cp'
+        ];
+
+        const extendedAdminPaths = [
+            ...defaultAdminPaths,
+            '/admin1', '/admin2', '/admincp', '/admin-cp',
+            '/moderator', '/management', '/backend', 
+            '/admin/login', '/administrator/login'
+        ];
+
+        function startAdminFinder() {
+            const domain = document.getElementById('targetDomain').value;
+            const listType = document.getElementById('listType').value;
+            const resultSection = document.getElementById('resultSection');
+            const resultContainer = document.getElementById('resultContainer');
+
+            if (!domain) {
+                alert('Harap masukkan domain target!');
+                return;
+            }
+
+            resultContainer.innerHTML = ''; // Bersihkan hasil sebelumnya
+            resultSection.style.display = 'block';
+
+            let paths = defaultAdminPaths;
+            if (listType === 'extended') paths = extendedAdminPaths;
+
+            const protocol = domain.includes('http') ? '' : 'http://';
+            const validUrls = [];
+
+            paths.forEach(path => {
+                const url = `${protocol}${domain}${path}`;
+                fetch(url, { 
+                    method: 'GET', 
+                    mode: 'no-cors',
+                    timeout: 5000 
+                })
+                .then(response => {
+                    if (response.type === 'opaqueredirect' || response.status === 200) {
+                        addResultToUI(url, true);
+                    }
+                })
+                .catch(error => {
+                    // Untuk beberapa kasus, tangani error dengan lebih detail
+                    if (error.name === 'TypeError') {
+                        addResultToUI(url, false);
+                    }
+                });
+            });
+        }
+
+        function addResultToUI(url, isValid) {
+            const resultContainer = document.getElementById('resultContainer');
+            const resultItem = document.createElement('div');
+            resultItem.classList.add('result-item');
+            
+            resultItem.innerHTML = `
+                <span style="color: ${isValid ? 'green' : 'red'}">
+                    ${url} ${isValid ? '(Berpotensi Admin Panel)' : '(Tidak Dapat Diakses)'}
+                </span>
+                <button class="copy-btn" onclick="copyToClipboard('${url}')">
+                    <i class="fas fa-copy"></i>
+                </button>
+            `;
+
+            resultContainer.appendChild(resultItem);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('URL disalin!');
+            });
+        }
+    </script>
+    <script src="http://codeforker.42web.io/tools/js/main.js"></script>
+</body>
+</html>
