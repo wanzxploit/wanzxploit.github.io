@@ -1,0 +1,799 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 60px;
+  transition: background-color 0.3s, color 0.3s, opacity 0.5s ease;
+  /* Menambahkan transisi untuk opacity */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  opacity: 0;
+  /* Mulai dengan transparan */
+  animation: fadeIn 1s forwards;
+  /* Terapan animasi fadeIn dengan durasi 1 detik */
+}
+
+/* Animasi Fade In */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    /* Akhirnya menjadi terlihat */
+  }
+}
+
+/* Tema Terang */
+body[data-theme="light"] {
+  background-color: #f0f4f8;
+  color: #1a365d;
+}
+
+/* Tema Gelap */
+body[data-theme="dark"] {
+  background-color: #1a202c;
+  color: #e2e8f0;
+}
+
+/* Header Styling */
+.header {
+  height: 60px;
+  /* Atur tinggi sesuai kebutuhan */
+  position: relative;
+  /* Membuat posisi relatif agar p2 dapat diposisikan secara absolut */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header[data-theme="light"] {
+  background-color: #3182ce;
+  color: white;
+}
+
+.header[data-theme="dark"] {
+  background-color: #2c5282;
+  color: #e2e8f0;
+}
+
+.menu-toggle,
+.theme-toggle {
+  cursor: pointer;
+  font-size: 24px;
+  /* Ukuran font ditingkatkan */
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  /* Lebar diperbesar */
+  height: 48px;
+  /* Tinggi diperbesar */
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.menu-toggle:hover,
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 10px 15px;
+  }
+
+  .menu-toggle,
+  .theme-toggle {
+    font-size: 24px;
+    /* Ukuran font tetap lebih besar */
+    width: 44px;
+    /* Lebar tetap lebih besar */
+    height: 44px;
+    /* Tinggi tetap lebih besar */
+  }
+}
+
+/* Slide Menu Styling */
+#slideMenu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+#slideMenu[data-theme="light"] {
+  background-color: #ffffff;
+  color: #1a365d;
+}
+
+#slideMenu[data-theme="dark"] {
+  background-color: #2d3748;
+  color: #e2e8f0;
+}
+
+#slideMenu img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: 0 auto 10px;
+  object-fit: cover;
+}
+
+#slideMenu a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 18px;
+  padding: 10px 20px;
+  /* Menambahkan padding horizontal */
+  transition: background-color 0.3s;
+  border-radius: 8px;
+}
+
+#slideMenu a i {
+  margin-right: 10px;
+  /* Menambahkan jarak antara ikon dan teks */
+}
+
+#slideMenu[data-theme="light"] a:hover {
+  background-color: #e2e8f0;
+}
+
+#slideMenu[data-theme="dark"] a:hover {
+  background-color: #4a5568;
+}
+
+#slideMenu[data-theme="light"] a {
+  color: #1a365d;
+}
+
+#slideMenu[data-theme="dark"] a {
+  color: #e2e8f0;
+}
+
+.content {
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tab Content Styling */
+.tab-content {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.tab-content[data-theme="light"] {
+  background-color: #ffffff;
+  color: #1a365d;
+}
+
+.tab-content[data-theme="dark"] {
+  background-color: #1a202c;
+  color: #e2e8f0;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Card Styling untuk Blog */
+.card {
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px;
+  width: 320px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff; /* Latar belakang putih */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Shadow yang halus */
+}
+
+.card[data-theme="light"] {
+  background-color: #f9fafb; /* Latar belakang soft */
+  color: #1a365d;
+}
+
+.card[data-theme="dark"] {
+  background-color: #2d3748; /* Darker untuk tema gelap */
+  color: #e2e8f0;
+}
+
+/* Hover Effect untuk Card Blog */
+.card:hover {
+  transform: translateY(-8px); /* Sedikit mengangkat */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Shadow lebih tajam */
+}
+
+/* Styling untuk Gambar di Card Blog */
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 4px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Game Card Container (Parent) */
+.game-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsif dengan min 300px */
+  gap: 30px; /* Jarak antar baris dan kolom */
+  padding: 20px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Game Card Styling */
+.game-card {
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #fff; /* Latar belakang putih */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Shadow halus */
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card[data-theme="light"] {
+  background-color: #f9fafb; /* Soft background */
+  color: #1a365d;
+}
+
+.game-card[data-theme="dark"] {
+  background-color: #2d3748; /* Dark background */
+  color: #e2e8f0;
+}
+
+.game-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 4px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game-card h4 {
+  margin: 10px 0;
+}
+
+.game-card a {
+  color: #fff;
+  background-color: #3182ce;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.game-card a:hover {
+  background-color: #2b6cb0;
+}
+
+/* Menghilangkan hover putih */
+.game-card:hover {
+  transform: translateY(-8px); /* Sedikit mengangkat */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Tombol Game Link */
+.game-link {
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 30px; /* Tetap berbentuk kapsul tapi lebih ramping */
+    transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer; /* Mengubah kursor saat hover */
+    font-size: 14px; /* Ukuran font lebih pas untuk tombol */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Bayangan lebih halus */
+    min-width: 120px; /* Lebar minimum tombol */
+}
+
+/* Tema Light */
+.game-link[data-theme="light"] {
+    background-color: #3182ce; /* Warna biru terang */
+    color: white;
+    border: 1px solid #2b6cb0; /* Sedikit border untuk dimensi */
+}
+
+/* Tema Dark */
+.game-link[data-theme="dark"] {
+    background-color: #2c5282; /* Warna biru gelap */
+    color: #e2e8f0;
+    border: 1px solid #2a4365; /* Sedikit border gelap */
+}
+
+/* Hover Effect */
+.game-link:hover {
+    transform: scale(1.05); /* Sedikit membesar */
+    background-color: #2b6cb0; /* Warna biru hover lebih gelap */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Bayangan lebih tajam saat hover */
+}
+
+/* Active Effect */
+.game-link:active {
+    transform: scale(0.95); /* Sedikit mengecil saat tombol ditekan */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Kembali ke bayangan awal */
+    background-color: #265a91; /* Warna lebih gelap saat ditekan */
+}
+
+/* Tools Button Styling */
+.tools-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  width: 100%;
+}
+
+.tool-button {
+  position: relative;
+  padding: 25px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: calc(50% - 30px);
+  max-width: 250px;
+  justify-content: center;
+}
+
+.tool-button[data-theme="light"] {
+  background-color: #3182ce;
+  color: white;
+}
+
+.tool-button[data-theme="dark"] {
+  background-color: #2c5282;
+  color: #e2e8f0;
+}
+
+.tool-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer Styling */
+#footer {
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+#footer[data-theme="light"] {
+  background-color: #3182ce;
+  color: #1a365d;
+  border-top: 1px solid #e2e8f0;
+}
+
+#footer[data-theme="dark"] {
+  background-color: #2c5282;
+  color: #e2e8f0;
+  border-top: 1px solid #1a202c;
+}
+
+#footer .footer-item a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#footer .footer-item a i {
+  color: white;
+  font-size: 22px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+#footer .footer-item a i:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 10px 15px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .tab-content.active {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card,
+  .game-card,
+  .tool-button {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .tools-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #slideMenu {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .menu-divider {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    /* Warna garis yang netral */
+    margin: 10px 0;
+    /* Jarak antar menu */
+    opacity: 0.6;
+    /* Sedikit transparan untuk kesan soft */
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+/* Aksesibilitas Tambahan */
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+input,
+button,
+a,
+select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Typography */
+p2 {
+  display: block;
+  /* Pastikan p2 adalah blok agar bisa mengatur lebar */
+  width: 100%;
+  /* Membuat elemen mengambil lebar penuh kontainer */
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 18px;
+  /* Ukuran lebih besar untuk menonjolkan judul */
+  font-weight: 700;
+  /* Tebal untuk efek judul */
+  line-height: 1.3;
+  /* Sedikit lebih rapat */
+  margin: 20px 0;
+  /* Jarak lebih besar untuk kesan elegan */
+  padding: 0;
+  text-align: center;
+  /* Mengatur teks agar berada di tengah */
+  letter-spacing: 1px;
+  /* Spasi antar huruf untuk tampilan lebih rapi */
+}
+
+
+h4 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Animasi dan Transisi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.tab-content.active {
+  animation: fadeIn 0.5s ease;
+}
+
+/* css untuk settings*/
+.settings-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 12px;
+  /* Menambahkan border-radius ke seluruh kontainer */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Menambahkan bayangan untuk kedalaman */
+}
+
+.settings-section {
+  width: 100%;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: background-color 0.3s;
+  /* Transisi halus saat tema berubah */
+}
+
+.settings-section[data-theme="light"] {
+  background-color: #ffffff;
+  color: #1a365d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section[data-theme="dark"] {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  box-shadow: 0 4px 6px rgba(0, 255, 255, 0.1);
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  /* Tambahkan padding untuk ruang tambahan */
+  border-radius: 8px;
+  /* Membuat sudut lebih melingkar */
+  transition: background-color 0.3s;
+  /* Transisi halus saat hover */
+}
+
+.settings-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  /* Efek hover untuk interaksi yang lebih baik */
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 10px;
+  /* Menambah jarak antara label dan switch */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: #3182ce;
+  /* Warna switch saat aktif */
+}
+
+input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+.settings-section-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.settings-section-title[data-theme="light"] {
+  color: #1a365d;
+}
+
+.settings-section-title[data-theme="dark"] {
+  color: #e2e8f0;
+}
+
+.settings-item[data-theme="light"] {
+  color: #1a365d;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.settings-item[data-theme="dark"] {
+  color: #e2e8f0;
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+/* css blogspot */
+.tutorial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tutorial-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 20px;
+        }
+        .code-snippet {
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        /* Mode Terang */
+        body[data-theme="light"] .code-snippet {
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        /* Mode Gelap */
+        body[data-theme="dark"] .code-snippet {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            border: 1px solid #444;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 0;
+        }
+
+        /* Mode Gelap untuk warning box */
+        body[data-theme="dark"] .warning-box {
+            background-color: #3a2f2f;
+            border-color: #5a4343;
+            color: #f0c674;
+        }
+/* Gaya untuk link blog dan game */
+.blog-title {
+    margin: 0; /* Menghilangkan margin untuk h4 */
+}
+
+.blog-link {
+    text-decoration: none; /* Menghilangkan garis bawah */
+    font-weight: bold; /* Menebalkan teks */
+    color: inherit; /* Menggunakan warna default dari elemen induk */
+    transition: color 0.3s; /* Transisi halus untuk perubahan warna */
+}
+
+.blog-link:hover {
+    text-decoration: underline; /* Menambahkan garis bawah saat hover */
+}
+
+.blog-link:active {
+    text-decoration: none; /* Menghilangkan garis bawah saat diklik */
+}
+
+/* Sembunyikan item yang tidak sesuai pencarian */
+.hidden {
+    display: none !important;
+}
+/* Cas tombol srch */
+.search-container {
+    display: flex;
+    justify-content: flex-end; /* Memindahkan ke kanan */
+    width: 100%;
+    max-width: 600px;
+    margin: 15px 0;
+    padding: 0 20px;
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 600px; /* Menambahkan batasan lebar maksimal */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-right: 10px; /* Menambahkan sedikit margin untuk pemisahan */
+}
+
+#searchButton:hover {
+    background-color: #2c5282; /* Warna latar belakang saat hover */
+}
+.tutorial-container .thumbnail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 3px solid #fff; /* Bingkai putih */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Efek bayangan */
+}
