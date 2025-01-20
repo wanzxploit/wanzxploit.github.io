@@ -3,288 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanz Xploit</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Wanz Xploit | Developer Space</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
         :root {
-            --primary-color: #FF5733; 
-            --background-color-dark: #121212; 
-            --text-color-dark: #E0E0E0; 
-            --text-color-light: #ffffff; 
-            --card-background: #1E1E1E; 
-            --border-color: rgba(255, 255, 255, 0.1); 
+            --bg: #0f1729;
+            --primary: #22d3ee;
+            --accent: #818cf8;
+            --text: #f1f5f9;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: var(--background-color-dark); 
-            color: var(--text-color-dark); 
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        body.light {
-            background: #ffffff; 
-            color: #000000; 
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between; 
-            align-items: center;
-            background-color: rgba(30, 30, 30, 0.9);
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .logo {
-            font-size: 28px; 
-            font-weight: bold;
-            color: var(--primary-color); 
-        }
-
-        .hamburger {
-            cursor: pointer;
-            font-size: 28px; 
-            color: var(--text-color-dark); 
-        }
-
-        .menu {
-            display: none; 
+        .matrix-bg {
             position: fixed;
             top: 0;
-            left: -250px; 
-            height: 100vh; 
-            width: 250px; 
-            background: #1e1e1e;
-            padding: 20px;
-            transition: left 0.3s ease; 
-            z-index: 100; 
-        }
-
-        .menu.active {
-            left: 0; 
-            display: block; 
-        }
-
-        .menu a {
-            color: var(--text-color-dark);
-            padding: 15px 10px; 
-            text-decoration: none;
-            display: block; 
-            margin-bottom: 10px; 
-            border-radius: 4px; 
-            transition: background-color 0.3s, color 0.3s; 
-        }
-
-        .menu a:hover {
-            background-color: var(--primary-color); 
-            color: #ffffff; 
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; 
-            right: 20px; 
-            background: none; 
-            border: none; 
-            color: white; 
-            font-size: 24px; 
-            cursor: pointer; 
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center; 
-            padding-top: 20px;
-            margin-bottom: 20px; 
-        }
-
-        .social-icons a {
-            margin: 0 10px; 
-            color: var(--text-color-dark); 
-            font-size: 24px; 
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: var(--primary-color);
-        }
-
-        .theme-toggle {
-            background-color: var(--primary-color);
-            border: none; 
-            color: #ffffff; 
-            padding: 10px;
-            border-radius: 50%; 
-            cursor: pointer;
-            width: 50px; 
-            height: 50px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s, transform 0.3s;
-            margin-top: 20px; 
-        }
-
-        .theme-toggle:hover {
-            background-color: #E57300; 
-            transform: scale(1.1);
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto; 
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        h1 {
-            font-size: 2em;  /* Ubah ukuran teks h1 */
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            color: var(--primary-color); 
-            font-size: 1.5em;  /* Ubah ukuran teks h2 */
-        }
-
-        p {
-            font-size: 1em;  /* Ubah ukuran teks paragraf */
-            line-height: 1.6;
-        }
-
-        .card {
-            background: var(--card-background);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            transition: transform 0.2s;
-        }
-
-        .card h3 {
-            color: var(--primary-color);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .copyright {
+        .profile-wrapper {
             text-align: center;
-            padding: 20px 0; 
-            margin: 20px 0; 
-            background-color: rgba(30, 30, 30, 0.9); 
-            color: var(--text-color-light); 
-            font-size: 0.9em;  /* Ubah ukuran teks copyright */
-            border-top: 1px solid var(--primary-color); 
+            margin-bottom: 3rem;
+            position: relative;
         }
 
-        body.light .container {
-            background: #f0f0f0; 
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: block;
+            position: relative;
+            border: 3px solid var(--primary);
+            padding: 5px;
+            animation: pulseGlow 3s infinite;
         }
 
-        body.light .card {
-            background: #ffffff; 
-            border: 1px solid #ddd; 
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.4); }
+            100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.2); }
         }
 
-        body.light .copyright {
-            background-color: #f0f0f0; 
-            color: #000; 
+        .profile-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .links-grid {
+            display: grid;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(34, 211, 238, 0.2);
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+
+        .link-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .link-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.1);
+        }
+
+        .link-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .profile-title {
+                font-size: 2.2rem;
+            }
+            
+            .link-card {
+                padding: 1rem;
+            }
+            
+            .link-icon {
+                font-size: 1.5rem;
+            }
+            
+            .link-text {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="hamburger" id="hamburger" aria-label="Menu">
-            <i class="fas fa-bars"></i> 
-        </div>
-        <div class="logo">WanzXploit</div>
-    </header>
-    <div class="menu" id="menu" aria-hidden="true">
-        <button class="close-btn" id="close-btn" aria-label="Tutup Menu">&times;</button>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
-
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fas fa-envelope"></i></a>
-        </div>
-        
-        <button class="theme-toggle" id="theme-toggle" aria-label="Ganti Tema">
-            <i class="fas fa-sun"></i> 
-        </button>
-    </div>
+    <canvas class="matrix-bg" id="matrix"></canvas>
+    
     <div class="container">
-        <h1>Selamat Datang di Website Kami!</h1>
-        <p>Ini adalah website modern dengan tema gelap yang memberikan pengalaman terbaik untuk setiap pengunjung.</p>
+        <div class="profile-wrapper">
+            <img src="logo.png" alt="Wanz Xploit" class="profile-img">
+            <h1 class="profile-title">Wanz Xploit</h1>
+        </div>
 
-        <h2>Fitur Kami</h2>
-        <div class="card">
-            <h3>Desain Responsif</h3>
-            <p>Website kami dirancang untuk memberikan pengalaman terbaik di semua perangkat.</p>
+        <div class="links-grid">
+            <a href="https://github.com/wanzxploit" target="_blank" class="link-card">
+                <i class="fab fa-github link-icon"></i>
+                <span class="link-text">GitHub</span>
+            </a>
+
+            <a href="https://youtube.com/wanzxploit" target="_blank" class="link-card">
+                <i class="fab fa-youtube link-icon"></i>
+                <span class="link-text">YouTube</span>
+            </a>
+
+            <a href="https://tiktok.com/@reyzroam" target="_blank" class="link-card">
+                <i class="fab fa-tiktok link-icon"></i>
+                <span class="link-text">TikTok</span>
+            </a>
+
+            <a href="https://instagram.com/wanz_xploit" target="_blank" class="link-card">
+                <i class="fab fa-instagram link-icon"></i>
+                <span class="link-text">Instagram</span>
+            </a>
+                        <a href="https://tools.wanzxploit.my.id/?i=1" target="_blank" class="link-card">
+                <i class="fas fa-cube text-blue-500 text-3xl link-icon"></i>
+                <span class="link-text">DeV Tools</span>
+            </a>
         </div>
-        <div class="card">
-            <h3>Interaktif</h3>
-            <p>Setiap fitur dirancang agar interaktif dan ramah pengguna.</p>
-        </div>
-        <div class="card">
-            <h3>Konten Berkualitas</h3>
-            <p>Kami menyediakan konten yang bermanfaat dan relevan untuk semua pengunjung.</p>
-        </div>
-        
-        <h2>Testimonial Pelanggan</h2>
-        <div class="testimonial">
-            <p>"Website ini sangat membantu. Desainnya modern dan mudah digunakan!" - Pelanggan A</p>
-            <p>"Saya sangat menyukai tampilan tema gelap yang nyaman untuk mata." - Pelanggan B</p>
-        </div>
+
+        <footer>
+            <p>Developer & Pentester</p>
+        </footer>
     </div>
-    <footer class="copyright">
-        <p>&copy; 2023 Wanz Xploit. All rights reserved.</p>
-    </footer>
+
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById("menu");
-            const isActive = menu.classList.toggle("active");
-            menu.setAttribute("aria-hidden", !isActive);
-        }
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
 
-        function closeMenu() {
-            const menu = document.getElementById("menu");
-            menu.classList.remove("active");
-            menu.setAttribute("aria-hidden", "true");
-        }
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        function toggleTheme() {
-            document.body.classList.toggle("light");
-            const icon = this.querySelector("i");
-            if (document.body.classList.contains("light")) {
-                this.setAttribute("aria-label", "Ganti ke Tema Gelap");
-                icon.classList.remove("fa-sun");
-                icon.classList.add("fa-moon");
-            } else {
-                this.setAttribute("aria-label", "Ganti ke Tema Terang");
-                icon.classList.remove("fa-moon");
-                icon.classList.add("fa-sun");
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789<>[]{}|=+-.';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(15, 23, 41, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#22d3ee';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
             }
         }
 
-        document.getElementById("hamburger").addEventListener("click", toggleMenu);
-        document.getElementById("close-btn").addEventListener("click", closeMenu);
-        document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
-
-        document.addEventListener("click", function(event) {
-            const menu = document.getElementById("menu");
-            const hamburger = document.getElementById("hamburger");
-            if (menu.classList.contains("active") && !menu.contains(event.target) && !hamburger.contains(event.target)) {
-                closeMenu();
-            }
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
+
+        setInterval(drawMatrix, 50);
     </script>
 </body>
 </html>
