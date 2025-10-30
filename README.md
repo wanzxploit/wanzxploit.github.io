@@ -4,8 +4,7 @@ Welcome to my **GitHub Pages**! This site showcases my projects, tools, and othe
 
 ## 🛠️ Technology Used  
 - **HTML, CSS, JavaScript** for the main website.  
-- **PHP** for server-side tools like MATA-SERVER.  
-- **Hosting**: Free domain at `wanzxploit.my.id` using InfinityFree.  
+- **PHP** for server-side tools like MATA-SERVER.   
 
 ## 🚀 How to Access 
 Visit my github pages hare:
