@@ -11,6 +11,6 @@ Welcome to my **GitHub Pages**! This site showcases my projects, tools, and othe
 Visit my github pages hare:
 [wanzxploit.github.io](http://wanzxploit.github.io).  
 
-Visit my website here: [wanzxploit.my.id](http://wanzxploit.my.id).  
+Visit my website here: [devtools.biz.id](http://devtools.biz.id).  
 
 Thank you for visiting my page! Feel free to explore my projects and support by giving a *star* on GitHub! 🙌
